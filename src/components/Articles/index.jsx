@@ -30,12 +30,8 @@ const Articles = () => {
         <section className="articles">
           {data.offers.map(offer => {
             return (
-              <article>
-                <Link
-                  key={offer.id}
-                  className="link-to-article"
-                  to={`/Offer/${offer._id}`}
-                >
+              <article key={offer._id}>
+                <Link className="link-to-article" to={`/Offer/${offer._id}`}>
                   <div className="article">
                     <div className="article-picture">
                       {offer.pictures.length > 0 && (

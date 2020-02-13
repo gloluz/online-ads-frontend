@@ -6,7 +6,7 @@ import Logo from "./Leboncoin.fr_Logo_2016.svg.png";
 import Container from "../Container";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ token, onLogout }) => {
   return (
     <header className="header">
       <Container>
@@ -33,9 +33,16 @@ const Header = () => {
                 <FontAwesomeIcon icon="user" className="icon-user" />
               </div>
 
-              <Link to="/sign_up" className="header-connect">
-                Se connecter
-              </Link>
+              {!token && (
+                <Link to="/log_in" className="header-connect">
+                  Se connecter
+                </Link>
+              )}
+              {token && (
+                <span className="header-connect" onClick={onLogout}>
+                  Se déconnecter
+                </span>
+              )}
             </button>
           </div>
         </div>

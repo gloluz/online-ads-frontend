@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import "./index.css";
 import Container from "../Container";
@@ -11,7 +12,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [checkbox, setChexbox] = useState(false);
+  const [checkbox, setCheckbox] = useState(false);
 
   const fetchData = async event => {
     event.preventDefault();
@@ -30,17 +31,29 @@ const SignUp = () => {
     }
 
     if (!checkbox) {
-      alert("Veuillez accepter les Conditions Générales de Vente");
+      alert("Veuillez accepter les conditions générales");
     }
 
     if (username && email && password === confirmPassword) {
-      const response = await axios.post(
-        " https://leboncoin-api.herokuapp.com/api/user/sign_up",
-        { username: username, email: email, password: password }
-      );
+      try {
+        const {
+          data
+        } = await axios.post(
+          " https://leboncoin-api.herokuapp.com/api/user/sign_up",
+          { username: username, email: email, password: password }
+        );
+        setData(data);
+        console.log("token: ", data.token);
 
-      setData(response.data);
-      console.log(response.data);
+        const token = data.token;
+        Cookies.set("UserToken", token, { expires: 20 });
+      } catch (error) {
+        if (error.response.data.error.indexOf("duplicate key")) {
+          alert(
+            "Cet identifiant est déjà utilisé, veuillez en choisir un autre"
+          );
+        }
+      }
     }
   };
 
@@ -64,8 +77,8 @@ const SignUp = () => {
     setConfirmPassword(value);
   };
 
-  const handleChangeCheckbox = () => {
-    setChexbox(true);
+  const checkboxIsSelected = () => {
+    setCheckbox(!checkbox);
   };
 
   return (
@@ -117,16 +130,22 @@ const SignUp = () => {
             <form onSubmit={fetchData}>
               <h2 className="title-create-account">Créer un compte</h2>
 
-              <h3 className="title-name">Pseudo</h3>
+              <label className="label-user-sign-up" htmlFor="username">
+                Pseudo
+              </label>
               <input
+                id="username"
                 type="text"
                 className="sign-up-input"
                 onChange={handleChangeUsername}
               />
 
-              <h3>Adresse email *</h3>
+              <label className="label-user-sign-up" htmlFor="email">
+                Adresse email *
+              </label>
               <input
-                type="text"
+                id="email"
+                type="email"
                 name="email"
                 className="sign-up-input"
                 onChange={handleChangeEmail}
@@ -134,19 +153,23 @@ const SignUp = () => {
 
               <div className="sign-up-password-content">
                 <div className="title-password-sign-up">
-                  <h3 className="title-password">Mot de passe *</h3>
+                  <label htmlFor="password" className="label-password">
+                    Mot de passe *
+                  </label>
+                  <label htmlFor="confirm password" className="label-password">
+                    Confirmer le mot de passe *
+                  </label>
+                </div>
+
+                <div className="input-passwords">
                   <input
+                    id="password"
                     type="password"
                     className="sign-up-confirm-password"
                     onChange={handleChangePassword}
                   />
-                </div>
-
-                <div>
-                  <h3 className="title-confirm-password">
-                    Confirmer le mot de passe *
-                  </h3>
                   <input
+                    id="confirm password"
                     type="password"
                     className="sign-up-confirm-password"
                     onChange={handleChangeConfirmPassword}
@@ -158,7 +181,7 @@ const SignUp = () => {
                 <input
                   type="checkbox"
                   className="checkbox"
-                  onChange={handleChangeCheckbox}
+                  onClick={checkboxIsSelected}
                 />
                 <span>
                   J'accepte les Conditions Générales de Vente et les Conditions

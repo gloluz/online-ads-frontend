@@ -1,7 +1,7 @@
 .sign-up-content {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 40px;
   background-color: #ffffff;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
@@ -19,8 +19,7 @@
 .content-left-side {
   display: flex;
   justify-content: space-between;
-
-  margin: 40px 40px 40px 0;
+  margin: 40px 20px 40px 0;
 }
 
 .sign-up-icon {
@@ -31,38 +30,69 @@
 }
 
 .sign-up-right-content {
-  padding: 0 60px 0 100px;
+  margin-left: 40px;
+  min-width: 350px;
+  font-size: 16px;
 }
 
 .title-create-account {
   text-align: center;
   font-size: 20px;
+  padding-bottom: 30px;
+  border-bottom: 3px solid #f56b2a;
+}
+
+.label-user-sign-up {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 15px;
 }
 
 .sign-up-input {
   width: 100%;
   border: 1px solid #d9e0eb;
   border-radius: 5px;
-  padding: 16px;
+  height: 40px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  padding: 0 5px;
+  font-size: 14px;
 }
 
-.sign-up-password-content {
+.title-password-sign-up {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.label-password {
+  width: calc(50% - 10px);
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.input-passwords {
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  height: 40px;
+}
+
 .sign-up-confirm-password {
+  width: calc(50% - 10px);
+  height: 40px;
   border: 1px solid #d9e0eb;
   border-radius: 5px;
-  margin-bottom: 20px;
-  padding: 10px 10px;
+  box-sizing: border-box;
+  padding: 0 5px;
+  font-size: 14px;
 }
 
 .checkbox-content {
   padding: 20px 0px;
   cursor: pointer;
 }
+
 .checkbox {
   cursor: pointer;
 }

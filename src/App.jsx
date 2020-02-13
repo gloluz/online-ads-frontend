@@ -1,5 +1,10 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faPlusSquare,
@@ -9,6 +14,7 @@ import {
   faBell,
   faEye
 } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "js-cookie";
 
 import "./App.css";
 import Header from "./containers/Header";
@@ -20,16 +26,37 @@ import LogIn from "./containers/LogIn";
 library.add(faPlusSquare, faSearch, faUser, faClock, faBell, faEye);
 
 const App = () => {
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const token = Cookies.get("UserToken");
+
+    if (token) {
+      setToken(token);
+    }
+  }, []);
+
+  const handleLogin = token => {
+    setToken(token);
+  };
+
+  const handleLogout = () => {
+    setToken("");
+    Cookies.remove("UserToken");
+  };
+
   return (
     <Router>
-      <Header />
+      <Header token={token} onLogout={handleLogout} />
 
       <Switch>
         <Route path="/sign_up">
-          <SignUp />
+          {token && <Redirect to="/" />}
+          {!token && <SignUp />}
         </Route>
         <Route path="/log_in">
-          <LogIn />
+          {token && <Redirect to="/" />}
+          {!token && <LogIn token={token} onLogin={handleLogin} />}
         </Route>
         <Route path="/offer/:id">
           <Offer />
