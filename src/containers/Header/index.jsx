@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import Logo from "./Leboncoin.fr_Logo_2016.svg.png";
 import Container from "../Container";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -31,7 +32,10 @@ const Header = () => {
               <div>
                 <FontAwesomeIcon icon="user" className="icon-user" />
               </div>
-              <div>Se connecter</div>
+
+              <Link to="/sign_up" className="header-connect">
+                Se connecter
+              </Link>
             </button>
           </div>
         </div>

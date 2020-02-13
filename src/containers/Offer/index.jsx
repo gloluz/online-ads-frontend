@@ -35,7 +35,9 @@ const Offer = () => {
             <article className="online-sale-left">
               <div className="online-sale-resume">
                 <div className="online-sale-resume-picture">
-                  <img src={data.pictures} alt="annonce" />
+                  {data.pictures.length > 0 && (
+                    <img src={data.pictures} alt="annonce" />
+                  )}
                 </div>
                 <div className="online-sale-resume-price">
                   <p> {data.title}</p>

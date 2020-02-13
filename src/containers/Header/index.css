@@ -71,3 +71,9 @@
   border: none;
   font-size: 14px;
 }
+
+.header-connect {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+}
