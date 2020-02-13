@@ -1,0 +1,49 @@
+.link-to-article {
+  text-decoration: none;
+  color: #000;
+}
+
+.articles {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.article {
+  display: flex;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  height: 180px;
+}
+
+.article-picture {
+  width: 190px;
+  height: 180px;
+  background-color: #cad1d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.article-picture-img {
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+}
+
+.article-title {
+  font-size: 22px;
+}
+
+.article-price {
+  font-size: 20px;
+  color: #f56b2a;
+}
