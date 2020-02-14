@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import "./index.css";
 import { formatDate } from "../../services/formatDate";
 import Container from "../../containers/Container";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Offer = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,43 +27,64 @@ const Offer = () => {
   }, []);
 
   return (
-    <Container>
-      <div>
+    <div>
+      <Container>
         {isLoading ? (
           <p>Chargement en cours ...</p>
         ) : (
           <div className="online-sale">
             <article className="online-sale-left">
               <div className="online-sale-resume">
-                <div className="online-sale-resume-picture">
+                <div className="online-sale-resume-picture-container">
                   {data.pictures.length > 0 && (
-                    <img src={data.pictures} alt="annonce" />
+                    <img
+                      src={data.pictures}
+                      alt="annonce"
+                      className="online-sale-resume-picture"
+                    />
                   )}
                 </div>
+
                 <div className="online-sale-resume-price">
-                  <p> {data.title}</p>
+                  <p className="title"> {data.title}</p>
                   <p className="price">{data.price} €</p>
                   <div>
                     <span>{formatDate(data.created)}</span>
                   </div>
                 </div>
-              </div>
-              <div className="online-sale-description">
-                <p>
-                  <strong> Description</strong>
-                </p>
-                <p> {data.description} </p>
+                <div className="online-sale-description">
+                  <p>
+                    <strong> Description</strong>
+                  </p>
+                  <p> {data.description} </p>
+                </div>
               </div>
             </article>
+
             <div className="online-sale-right">
-              <p>{data.creator.account.username}</p>
-              <p>17 annonces en ligne</p>
-              <button>Acheter</button>
+              <div className="online-sale-creator-container">
+                <p className="online-sale-right-creator">
+                  {data.creator.account.username}
+                </p>
+                <p className="online-sale-right-publications">
+                  17 annonces en ligne
+                </p>
+              </div>
+
+              <div className="online-sale-buy-container">
+                <button className="online-sale-right-buy-button">
+                  <FontAwesomeIcon
+                    icon="shopping-cart"
+                    className="icon-shopping"
+                  />
+                  <div>Acheter</div>
+                </button>
+              </div>
             </div>
           </div>
         )}
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

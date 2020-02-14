@@ -130,7 +130,7 @@ const SignUp = () => {
             <form onSubmit={fetchData}>
               <h2 className="title-create-account">Créer un compte</h2>
 
-              <label className="label-user-sign-up" htmlFor="username">
+              <label className="label-user-sign-up pseudo" htmlFor="username">
                 Pseudo
               </label>
               <input

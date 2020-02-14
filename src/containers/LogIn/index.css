@@ -12,13 +12,15 @@
 }
 .title-connection {
   text-align: center;
+  border-bottom: 3px solid #f56b2a;
+  padding-bottom: 20px;
 }
 
 .title-email {
+  display: block;
   margin: 20px 0 15px 0;
-  padding-top: 20px;
-  border-top: 3px solid #f56b2a;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .input {
@@ -30,8 +32,10 @@
 }
 
 .title-password {
-  margin-bottom: 15px;
+  display: block;
+  margin: 15px 0;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .log-in-password {

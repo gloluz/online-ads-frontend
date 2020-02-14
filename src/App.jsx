@@ -12,7 +12,8 @@ import {
   faUser,
   faClock,
   faBell,
-  faEye
+  faEye,
+  faShoppingCart
 } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 
@@ -22,8 +23,17 @@ import Offers from "./containers/Offers";
 import Offer from "./containers/Offer";
 import SignUp from "./containers/SignUp";
 import LogIn from "./containers/LogIn";
+import Post from "./containers/Post";
 
-library.add(faPlusSquare, faSearch, faUser, faClock, faBell, faEye);
+library.add(
+  faPlusSquare,
+  faSearch,
+  faUser,
+  faClock,
+  faBell,
+  faEye,
+  faShoppingCart
+);
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -50,6 +60,9 @@ const App = () => {
       <Header token={token} onLogout={handleLogout} />
 
       <Switch>
+        <Route path="/post">
+          <Post />
+        </Route>
         <Route path="/sign_up">
           {token && <Redirect to="/" />}
           {!token && <SignUp />}

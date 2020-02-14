@@ -52,16 +52,22 @@ const LogIn = ({ onLogin }) => {
         <form className="log-in" onSubmit={fetchData}>
           <div className="log-in-content">
             <h2 className="title-connection">Connexion</h2>
-            <h3 className="title-email">Adresse email</h3>
+            <label htmlFor="email" className="title-email">
+              Adresse email
+            </label>
             <input
+              id="email"
               type="email"
               name="email"
               className="input"
               onChange={handleChangeEmail}
             />
-            <h3 className="title-password">Mot de passe</h3>
+            <label htmlFor="password" className="title-password">
+              Mot de passe
+            </label>
             <div className="log-in-password">
               <input
+                id="password"
                 type="password"
                 className="input"
                 onChange={handleChangePassword}
