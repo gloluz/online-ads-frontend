@@ -21,19 +21,10 @@
   display: flex;
   flex-direction: column;
   min-width: 600px;
-  margin-left: 26px;
 }
 
-.online-sale-resume-picture-container {
+.main-informations-container {
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-  background: #ffffff;
-  width: 100%;
-}
-
-.online-sale-resume-picture {
-  max-height: 600px;
-  width: 100%;
-  object-fit: contain;
 }
 
 .online-sale-resume .title {
@@ -44,6 +35,7 @@
 .online-sale-resume-price {
   padding: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
 }
 
 .price {

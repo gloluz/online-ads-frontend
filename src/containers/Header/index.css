@@ -13,9 +13,9 @@
 .header-left {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  min-width: 600px;
+  min-width: 560px;
 }
 
 .header-logo {
@@ -25,13 +25,19 @@
 .button-add-offer {
   cursor: pointer;
   color: #ffffff;
-  font-size: 14px;
   background: #f56b2a;
   border-radius: 5px;
   border: none;
   display: flex;
   align-items: center;
   padding: 8px 10px;
+}
+.header-button-post {
+  text-decoration: none;
+}
+
+.header-button-post-text {
+  font-size: 14px;
 }
 
 .icon-square {
@@ -41,7 +47,6 @@
 
 .button-search {
   cursor: pointer;
-  font-size: 18px;
   background-color: #ffffff;
   border: none;
   border-bottom: 3px solid #f56b2a;
@@ -49,6 +54,12 @@
   align-items: center;
   height: 100%;
   padding-right: 15px;
+}
+
+.icon-search-link {
+  text-decoration: none;
+  color: #000000;
+  font-size: 18px;
 }
 
 .icon-search {

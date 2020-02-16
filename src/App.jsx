@@ -13,7 +13,9 @@ import {
   faClock,
   faBell,
   faEye,
-  faShoppingCart
+  faShoppingCart,
+  faChevronRight,
+  faChevronLeft
 } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 
@@ -32,7 +34,9 @@ library.add(
   faClock,
   faBell,
   faEye,
-  faShoppingCart
+  faShoppingCart,
+  faChevronRight,
+  faChevronLeft
 );
 
 const App = () => {
@@ -73,6 +77,9 @@ const App = () => {
         </Route>
         <Route path="/offer/:id">
           <Offer />
+        </Route>
+        <Route path="/search/:page">
+          <Offers />
         </Route>
         <Route path="/">
           <Offers />

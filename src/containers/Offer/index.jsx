@@ -6,6 +6,7 @@ import "./index.css";
 import { formatDate } from "../../services/formatDate";
 import Container from "../../containers/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Slideshow from "../../components/Slideshow";
 
 const Offer = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +16,7 @@ const Offer = () => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      " https://leboncoin-api.herokuapp.com/api/offer/" + id
+      `https://leboncoin-api.herokuapp.com/api/offer/${id}`
     );
 
     setData(response.data);
@@ -29,29 +30,26 @@ const Offer = () => {
   return (
     <div>
       <Container>
-        {isLoading ? (
-          <p>Chargement en cours ...</p>
-        ) : (
+        {isLoading && <p>Chargement en cours...</p>}
+
+        {!isLoading && (
           <div className="online-sale">
             <article className="online-sale-left">
               <div className="online-sale-resume">
-                <div className="online-sale-resume-picture-container">
+                <div className="main-informations-container">
                   {data.pictures.length > 0 && (
-                    <img
-                      src={data.pictures}
-                      alt="annonce"
-                      className="online-sale-resume-picture"
-                    />
+                    <Slideshow pictures={data.pictures} />
                   )}
-                </div>
 
-                <div className="online-sale-resume-price">
-                  <p className="title"> {data.title}</p>
-                  <p className="price">{data.price} €</p>
-                  <div>
-                    <span>{formatDate(data.created)}</span>
+                  <div className="online-sale-resume-price">
+                    <p className="title"> {data.title}</p>
+                    {data.price && <p className="price">{data.price} €</p>}
+                    <div>
+                      <span>{formatDate(data.created)}</span>
+                    </div>
                   </div>
                 </div>
+
                 <div className="online-sale-description">
                   <p>
                     <strong> Description</strong>

@@ -13,18 +13,29 @@ const Header = ({ token, onLogout }) => {
         <div className="header-content">
           <div className="header-left">
             <div>
-              <img src={Logo} alt="logo le bon coin" className="header-logo" />
+              <Link to="/">
+                <img
+                  src={Logo}
+                  alt="logo le bon coin"
+                  className="header-logo"
+                />
+              </Link>
             </div>
             <div>
-              <button className="button-add-offer">
-                <FontAwesomeIcon icon="plus-square" className="icon-square" />
-
-                <span>Déposer une annonce</span>
-              </button>
+              <Link to="/post" className="header-button-post">
+                <button className="button-add-offer">
+                  <FontAwesomeIcon icon="plus-square" className="icon-square" />
+                  <span className="header-button-post-text">
+                    Déposer une annonce
+                  </span>
+                </button>
+              </Link>
             </div>
             <button className="button-search">
-              <FontAwesomeIcon icon="search" className="icon-search" />
-              <span>Rechercher</span>
+              <Link to="/" className="icon-search-link">
+                <FontAwesomeIcon icon="search" className="icon-search" />
+                <span>Rechercher</span>
+              </Link>
             </button>
           </div>
           <div className="header-right">

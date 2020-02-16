@@ -1,10 +1,11 @@
 .search-bar {
-  max-width: 810px;
+  max-width: 820px;
   background: #ffffff;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin: -60px auto 40px auto;
-  padding: 60px;
+  padding: 40px;
+  box-sizing: border-box;
   position: relative;
   z-index: 2;
 }

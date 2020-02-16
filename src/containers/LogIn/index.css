@@ -7,7 +7,7 @@
 
 .log-in-content {
   background-color: #ffffff;
-  min-width: 614px;
+  min-width: 500px;
   padding: 10px 100px 24px 100px;
 }
 .title-connection {
@@ -51,6 +51,7 @@
   padding: 12px 0;
   color: #ffffff;
   font-size: 16px;
+  border: none;
   background: #4183d7;
   border-radius: 5px;
 }

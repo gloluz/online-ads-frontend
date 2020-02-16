@@ -1,3 +1,20 @@
+.ellipsis-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ellipsis-background {
+  position: relative;
+  background-color: #f56b2a;
+  border-radius: 0 0 600px 600px/0 0 80px 80px;
+  left: -5%;
+  width: 110%;
+  height: 100px;
+  z-index: 1;
+}
+
+/* ARTICLES */
+
 .link-to-article {
   text-decoration: none;
   color: #000;
@@ -16,6 +33,7 @@
   margin-bottom: 20px;
   cursor: pointer;
   height: 180px;
+  overflow: hidden;
 }
 
 .article-picture {
@@ -41,9 +59,32 @@
 
 .article-title {
   font-size: 22px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .article-price {
   font-size: 20px;
   color: #f56b2a;
+  margin-top: 10px;
+}
+
+/* PAGINATION */
+
+.pagination {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px 0;
+
+  .link {
+    text-decoration: none;
+    color: #336699;
+    padding: 3px 10px;
+
+    &.active {
+      background-color: #f56b2a;
+      color: #ffffff;
+    }
+  }
 }
