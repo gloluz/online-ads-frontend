@@ -1,14 +1,53 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import Dropzone from "react-dropzone";
 
 import "./index.css";
-
 import Container from "../Container";
 
-const Post = () => {
-  const [data, setData] = useState({});
+const Post = ({ token }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState();
+  const [pictures, setPictures] = useState([]);
+
+  const history = useHistory();
+
+  const postData = async event => {
+    event.preventDefault();
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data"
+        }
+      };
+
+      const body = new FormData();
+
+      body.append("title", title);
+      body.append("description", description);
+      body.append("price", price);
+
+      pictures.forEach((file, index) => {
+        body.append(`picture${index}`, file);
+      });
+
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/offer/publish`,
+        body,
+        config
+      );
+
+      alert("Votre annonce a bien été créée");
+
+      history.push(`/offer/${data._id}`);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   const handleChangeTitle = event => {
     const value = event.target.value;
@@ -25,12 +64,16 @@ const Post = () => {
     setPrice(value);
   };
 
+  const handleChangePicture = files => {
+    setPictures([...files]);
+  };
+
   return (
     <>
       <Container>
         <div className="form-container">
           <div className="main-title-post">Déposer une annonce</div>
-          <form>
+          <form onSubmit={postData}>
             <div className="offer-container">
               <label htmlFor="offer-title" className="offer-post-titles">
                 Titre de l'annonce*
@@ -47,8 +90,7 @@ const Post = () => {
               <label htmlFor="offer-description" className="offer-post-titles ">
                 Texte de l'annonce*
               </label>
-              <input
-                type="text"
+              <textarea
                 id="offer-description"
                 className="input-offer-post offer-input-text"
                 onChange={handleChangeDescription}
@@ -78,12 +120,24 @@ const Post = () => {
                 Photo*
               </label>
 
-              <input
-                type="file"
-                accept="image/png, image/jpeg"
-                id="picture"
-                className="input-files-post"
-              />
+              <Dropzone onDrop={handleChangePicture}>
+                {({ getRootProps, getInputProps }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p style={{ border: "2px dashed #f56b2a", padding: 20 }}>
+                        Glissez-déposez ici vos fichiers
+                      </p>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+
+              <ul>
+                {pictures.map(files => (
+                  <li>{files.path}</li>
+                ))}
+              </ul>
             </div>
 
             <button type="submit" className="post-button-submit">

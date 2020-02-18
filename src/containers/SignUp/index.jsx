@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
 
 import "./index.css";
 import Container from "../Container";
 
-const SignUp = () => {
+const SignUp = ({ onSignup }) => {
   const [data, setData] = useState({});
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [checkbox, setCheckbox] = useState(false);
+
+  const history = useHistory();
 
   const fetchData = async event => {
     event.preventDefault();
@@ -34,19 +36,22 @@ const SignUp = () => {
       alert("Veuillez accepter les conditions générales");
     }
 
-    if (username && email && password === confirmPassword) {
+    if (username && email && password === confirmPassword && checkbox) {
       try {
-        const {
-          data
-        } = await axios.post(
-          " https://leboncoin-api.herokuapp.com/api/user/sign_up",
-          { username: username, email: email, password: password }
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/user/sign_up`,
+          {
+            username: username,
+            email: email,
+            password: password
+          }
         );
         setData(data);
-        console.log("token: ", data.token);
 
         const token = data.token;
-        Cookies.set("UserToken", token, { expires: 20 });
+
+        onSignup(token);
+        history.push("/");
       } catch (error) {
         if (error.response.data.error.indexOf("duplicate key")) {
           alert(

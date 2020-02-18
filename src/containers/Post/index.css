@@ -44,6 +44,7 @@
 
 .offer-input-text {
   height: 139px;
+  padding: 5px;
 }
 
 .input-price-offer {
@@ -67,4 +68,11 @@
   margin: 20px 0 60px 0;
   height: 44px;
   width: 100%;
+}
+
+/* DROPZONE */
+
+.dropzone {
+  height: 46px;
+  text-align: center;
 }

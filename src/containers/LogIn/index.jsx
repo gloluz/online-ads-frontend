@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 import "./index.css";
 import Container from "../Container";
@@ -17,17 +16,17 @@ const LogIn = ({ onLogin }) => {
     event.preventDefault();
 
     try {
-      const {
-        data
-      } = await axios.post(
-        "https://leboncoin-api.herokuapp.com/api/user/log_in",
-        { email: email, password: password }
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/user/log_in`,
+        {
+          email: email,
+          password: password
+        }
       );
 
       setData(data);
 
       const token = data.token;
-      Cookies.set("UserToken", token, { expires: 20 });
 
       onLogin(token);
       history.push("/");

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Elements, StripeProvider } from "react-stripe-elements";
 import {
   BrowserRouter as Router,
   Route,
@@ -26,6 +27,7 @@ import Offer from "./containers/Offer";
 import SignUp from "./containers/SignUp";
 import LogIn from "./containers/LogIn";
 import Post from "./containers/Post";
+import CheckoutForm from "./containers/CheckoutForm";
 
 library.add(
   faPlusSquare,
@@ -52,6 +54,7 @@ const App = () => {
 
   const handleLogin = token => {
     setToken(token);
+    Cookies.set("UserToken", token, { expires: 20 });
   };
 
   const handleLogout = () => {
@@ -60,32 +63,47 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <Header token={token} onLogout={handleLogout} />
+    <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
+      <Router>
+        <Header token={token} onLogout={handleLogout} />
 
-      <Switch>
-        <Route path="/post">
-          <Post />
-        </Route>
-        <Route path="/sign_up">
-          {token && <Redirect to="/" />}
-          {!token && <SignUp />}
-        </Route>
-        <Route path="/log_in">
-          {token && <Redirect to="/" />}
-          {!token && <LogIn token={token} onLogin={handleLogin} />}
-        </Route>
-        <Route path="/offer/:id">
-          <Offer />
-        </Route>
-        <Route path="/search/:page">
-          <Offers />
-        </Route>
-        <Route path="/">
-          <Offers />
-        </Route>
-      </Switch>
-    </Router>
+        <Switch>
+          <Route path="/payment">
+            {!token && <Redirect to="log_in" />}
+            <Elements>
+              <CheckoutForm />
+            </Elements>
+          </Route>
+
+          <Route path="/post">
+            {!token && <Redirect to="/log_in" />}
+            <Post token={token} />
+          </Route>
+
+          <Route path="/sign_up">
+            {token && <Redirect to="/" />}
+            {!token && <SignUp onSignup={handleLogin} />}
+          </Route>
+
+          <Route path="/log_in">
+            {token && <Redirect to="/" />}
+            {!token && <LogIn onLogin={handleLogin} />}
+          </Route>
+
+          <Route path="/offer/:id">
+            <Offer />
+          </Route>
+
+          <Route path="/search/:page">
+            <Offers />
+          </Route>
+
+          <Route path="/">
+            <Offers />
+          </Route>
+        </Switch>
+      </Router>
+    </StripeProvider>
   );
 };
 

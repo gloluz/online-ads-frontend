@@ -40,19 +40,21 @@ const Header = ({ token, onLogout }) => {
           </div>
           <div className="header-right">
             <button className="button-connect">
-              <div>
-                <FontAwesomeIcon icon="user" className="icon-user" />
-              </div>
-
               {!token && (
                 <Link to="/log_in" className="header-connect">
+                  <div>
+                    <FontAwesomeIcon icon="user" className="icon-user" />
+                  </div>
                   Se connecter
                 </Link>
               )}
               {token && (
-                <span className="header-connect" onClick={onLogout}>
-                  Se déconnecter
-                </span>
+                <div onClick={onLogout}>
+                  <div>
+                    <FontAwesomeIcon icon="user" className="icon-user" />
+                  </div>
+                  <span className="header-connect">Se déconnecter</span>
+                </div>
               )}
             </button>
           </div>

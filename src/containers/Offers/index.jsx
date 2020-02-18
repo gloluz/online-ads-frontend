@@ -16,16 +16,20 @@ const Offers = () => {
   const { page = "1" } = useParams();
 
   // Tableau qui contient les numéros de page
-  const pages = new Array(nbPages).fill(1).map((p, i) => `${i + 1}`);
+
+  const pages = nbPages
+    ? new Array(nbPages).fill(1).map((p, i) => `${i + 1}`)
+    : [];
 
   const skip = (page - 1) * NUMBER_RESULT_PER_PAGE;
 
   const fetchData = async () => {
     const response = await Axios.get(
-      `https://leboncoin-api.herokuapp.com/api/offer/with-count?skip=${skip}&limit=${NUMBER_RESULT_PER_PAGE}`
+      `${process.env.REACT_APP_BASE_URL}/offer/with-count?skip=${skip}&limit=${NUMBER_RESULT_PER_PAGE}`
     );
 
     setData(response.data);
+
     setNbPages(Math.round(response.data.count / NUMBER_RESULT_PER_PAGE));
     setIsLoading(false);
   };
@@ -59,7 +63,7 @@ const Offers = () => {
                       >
                         <div className="article">
                           <div className="article-picture">
-                            {offer.pictures.length > 0 && (
+                            {offer.pictures && offer.pictures.length > 0 && (
                               <img
                                 src={offer.pictures[0]}
                                 className="article-picture-img"

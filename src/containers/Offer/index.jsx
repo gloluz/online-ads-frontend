@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
-import "./index.css";
+import "./index.scss";
 import { formatDate } from "../../services/formatDate";
 import Container from "../../containers/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,13 +14,24 @@ const Offer = () => {
 
   const { id } = useParams();
 
+  const history = useHistory();
+
   const fetchData = async () => {
     const response = await axios.get(
-      `https://leboncoin-api.herokuapp.com/api/offer/${id}`
+      `${process.env.REACT_APP_BASE_URL}/offer/${id}`
     );
 
     setData(response.data);
     setIsLoading(false);
+  };
+
+  const goToPay = () => {
+    history.push("/payment", {
+      title: data.title,
+      picture: data.pictures[0],
+      price: data.price,
+      name: data.creator.account.username
+    });
   };
 
   useEffect(() => {
@@ -37,7 +48,7 @@ const Offer = () => {
             <article className="online-sale-left">
               <div className="online-sale-resume">
                 <div className="main-informations-container">
-                  {data.pictures.length > 0 && (
+                  {data.pictures && data.pictures.length > 0 && (
                     <Slideshow pictures={data.pictures} />
                   )}
 
@@ -62,15 +73,18 @@ const Offer = () => {
             <div className="online-sale-right">
               <div className="online-sale-creator-container">
                 <p className="online-sale-right-creator">
-                  {data.creator.account.username}
+                  {data.creator.account && data.creator.account.username}
                 </p>
                 <p className="online-sale-right-publications">
-                  17 annonces en ligne
+                  {data.creator.account.nbOffers} annonces en ligne
                 </p>
               </div>
 
               <div className="online-sale-buy-container">
-                <button className="online-sale-right-buy-button">
+                <button
+                  className="online-sale-right-buy-button "
+                  onClick={goToPay}
+                >
                   <FontAwesomeIcon
                     icon="shopping-cart"
                     className="icon-shopping"
