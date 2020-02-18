@@ -28,6 +28,7 @@ import SignUp from "./containers/SignUp";
 import LogIn from "./containers/LogIn";
 import Post from "./containers/Post";
 import CheckoutForm from "./containers/CheckoutForm";
+import Footer from "./containers/Footer";
 
 library.add(
   faPlusSquare,
@@ -102,6 +103,8 @@ const App = () => {
             <Offers />
           </Route>
         </Switch>
+
+        <Footer />
       </Router>
     </StripeProvider>
   );
