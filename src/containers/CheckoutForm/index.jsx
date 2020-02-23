@@ -46,7 +46,9 @@ const CheckoutForm = ({ stripe }) => {
       <Container>
         <div className="pay-content">
           <h2 className="main-title">Acheter en ligne</h2>
-          {picture && <img src={picture} alt="annonce à vendre" />}
+          {picture && (
+            <img src={picture} alt="annonce à vendre" className="pay-picture" />
+          )}
           <h2 className="title-offer">{title}</h2>
           <span className="price-offer">{price} €</span>
 
