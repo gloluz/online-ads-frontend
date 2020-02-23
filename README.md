@@ -12,13 +12,13 @@ Desktop version only.
 
 To clone this project : https://github.com/gloluz/online-ads-frontend.git
 
-Or with this link : [https://amazing-aryabhata-c805ca.netlify.com/]
-
 ## Read
 
 To read this project:
 
 `yarn start`
+
+Or with this link : [https://amazing-aryabhata-c805ca.netlify.com/]
 
 ## Contributing
 
