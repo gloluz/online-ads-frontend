@@ -7,6 +7,7 @@ import { formatDate } from "../../services/formatDate";
 import Container from "../../containers/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Slideshow from "../../components/Slideshow";
+import Loader from "../../loader.svg";
 
 const Offer = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +42,11 @@ const Offer = () => {
   return (
     <div>
       <Container>
-        {isLoading && <p>Chargement en cours...</p>}
+        {isLoading && (
+          <div className="loader">
+            <img src={Loader} alt="loader" />
+          </div>
+        )}
 
         {!isLoading && (
           <div className="online-sale">

@@ -5,6 +5,7 @@ import { formatDate } from "../../services/formatDate";
 
 import Container from "../Container";
 import SearchBar from "../../components/SearchBar";
+import Loader from "../../loader.svg";
 import "./index.scss";
 
 const NUMBER_RESULT_PER_PAGE = 20;
@@ -49,7 +50,9 @@ const Offers = () => {
       <Container>
         <div>
           {isLoading ? (
-            <p>Chargement en cours...</p>
+            <div className="loader">
+              <img src={Loader} alt="" loader />
+            </div>
           ) : (
             <section className="articles">
               {!data.offers && <div>Pas de résultat pour cette page</div>}
@@ -59,7 +62,7 @@ const Offers = () => {
                     <article key={offer._id}>
                       <Link
                         className="link-to-article"
-                        to={`/Offer/${offer._id}`}
+                        to={`/offer/${offer._id}`}
                       >
                         <div className="article">
                           <div className="article-picture">
