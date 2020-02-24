@@ -6,6 +6,8 @@ This project is an online ads front end. You can view ads, click on ads and view
 
 Desktop version only.
 
+To do : responsive and searches with the search bar.
+
 ![](capture.png)
 
 ## Installation
