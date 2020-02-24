@@ -39,6 +39,8 @@
 
 .search-bar-button {
   cursor: pointer;
+  border: none;
+  outline: none;
   width: 220px;
   height: 44px;
   background: #4183d7;

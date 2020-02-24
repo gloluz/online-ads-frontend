@@ -61,6 +61,7 @@
 .post-button-submit {
   cursor: pointer;
   background: #4183d7;
+  border: none;
   color: #ffffff;
   font-weight: bold;
   font-size: 16px;

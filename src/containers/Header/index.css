@@ -80,6 +80,7 @@
 .button-connect {
   cursor: pointer;
   border: none;
+  background: none;
   font-size: 14px;
 }
 
