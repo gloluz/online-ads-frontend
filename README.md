@@ -20,7 +20,7 @@ To read this project:
 
 `yarn start`
 
-Or with this link : [https://amazing-aryabhata-c805ca.netlify.com/]
+Or with this link : [https://replique-leboncoin.netlify.app]
 
 ## Contributing
 
